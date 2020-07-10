@@ -6,7 +6,7 @@ A classic game in HTML, CSS, and Javascript. It's an app for players to play the
 
 ## Features/User Stories
 
-MVP
+**MVP**
 - As a player, I want the game to be able to take user input so I can set the word or phrase.
 - As a player, I would like to see my letter options and see previously selected options so I can make decisions on my selections.
 - As a player, I would like to see a response to correct and incorrect answers so that I know how I'm doing in the game.
@@ -16,7 +16,7 @@ MVP
 - As a player, I would like to have a clear win or loss announcement so I know the game is over.
 
 
-Stretch Goals
+**Stretch Goals**
 - As a player, I would like to have a computer generated word or phrase so that I can play alone.
 - As a player, I would like to have fun images and background so that the game feels immersive.
 - As a player, I would like to be able to customize the "spaceman" image to a few options to play different versions of the game.

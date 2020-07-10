@@ -1,0 +1,1 @@
+// Use DOM manipulation to populate the 2 letters sections with available letters and then picked letters
