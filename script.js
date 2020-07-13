@@ -50,11 +50,20 @@ inputBox.addEventListener('click', function() {
     }
 })
 
-startButton.addEventListener('click', startGame() {
-    
-})
-
-document.addEventListener('click', resetButton);
-function reset() {
-
+for(i = 0; i<= alphabet.length - 1; i++) {
+    let availLetters = document.querySelector('#availLetters');
+    let letterButton = document.createElement('button');
+    letterButton.innerText = alphabet[i];
+    availLetters.appendChild(letterButton);
 }
+// startButton.addEventListener('click', function() {
+//     }
+//     letterButton.addEventListener('click', function() {
+
+//     })
+// })
+
+// document.addEventListener('click', resetButton);
+// function reset() {
+
+// }
