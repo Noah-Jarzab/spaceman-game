@@ -13,16 +13,48 @@
 // maybe use opacity to make the image appear upon incorrect responses and disappear upon reset
 // create a messages box that responds to user selections. e.g. "You have already selected ${letter}", "${letter} is not in the phrase", "There's ${numberOfLetters} ${letter} in the phrase! Good Job!", "You're getting close to takeoff... be careful!", etc
 
-const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-const guesses;
-const lives;
-const timeRemain;
-const score;
-const message;
-const inputBox;
-const resetButton = document.querySelector('.reset');
+let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+// const guesses ;
+// const lives ;
+// const timeRemain ;
+// const score ;
+// const message ;
+let inputBox = document.querySelector('.submit');
+let resetButton = document.querySelector('.reset');
+let startButton = document.querySelector('.start');
+
+// let letterButtons = function() {
+//     letterChoices = document.querySelector('#availLetters');
+//     letter = document.createElement('ul');
+//     for(i = 0; i < alphabet.length; i++) {
+//         letters.id = 'alphabet';
+//         list = document.createElement('li');
+//         list.id = 'letter';
+//         list.innerHTML = alphabet[i];
+//         letterChoices.appendChild(letter);
+//         letter.appendChild(list);
+//     }
+//     // console.log(availLetters());
+// }
+// console.log(letterButtons);
+
+inputBox.addEventListener('click', function() {
+    let phrase = document.getElementById('phrase').value;
+    let hiddenPhrase = phrase.split('');
+    // then create  underlined hidden text for each array item
+    for(i = 0; i <= hiddenPhrase.length - 1; i++) {
+        let phraseBox = document.querySelector('.guessPhrase');
+        let hiddenLetter = document.createElement('div');
+        hiddenLetter.innerText = hiddenPhrase[i];
+        phraseBox.appendChild(hiddenLetter);
+    }
+})
+
+startButton.addEventListener('click', startGame() {
+    
+})
 
 document.addEventListener('click', resetButton);
-function reset(){
+function reset() {
 
 }
