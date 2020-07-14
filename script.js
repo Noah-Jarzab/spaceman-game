@@ -19,49 +19,51 @@ let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
 // const timeRemain ;
 // const score ;
 // const message ;
+const canvas = document.querySelector('#spaceshipImage');
+const ctx = canvas.getContext('2d');
+ctx.beginPath();
+
 let inputBox = document.querySelector('.submit');
 let resetButton = document.querySelector('.reset');
 let startButton = document.querySelector('.start');
 
-// let letterButtons = function() {
-//     letterChoices = document.querySelector('#availLetters');
-//     letter = document.createElement('ul');
-//     for(i = 0; i < alphabet.length; i++) {
-//         letters.id = 'alphabet';
-//         list = document.createElement('li');
-//         list.id = 'letter';
-//         list.innerHTML = alphabet[i];
-//         letterChoices.appendChild(letter);
-//         letter.appendChild(list);
-//     }
-//     // console.log(availLetters());
-// }
-// console.log(letterButtons);
-
 inputBox.addEventListener('click', function() {
     let phrase = document.getElementById('phrase').value;
     let hiddenPhrase = phrase.split('');
+    let phraseBox = document.querySelector('.guessPhrase');
     // then create  underlined hidden text for each array item
     for(i = 0; i <= hiddenPhrase.length - 1; i++) {
-        let phraseBox = document.querySelector('.guessPhrase');
         let hiddenLetter = document.createElement('div');
         hiddenLetter.innerText = hiddenPhrase[i];
         phraseBox.appendChild(hiddenLetter);
+        hiddenLetter.setAttribute('class', 'hiddenLetter');
+    }
+});
+
+
+let letters = document.querySelector('.lettersBox');
+letters.addEventListener('click', function(event) {
+    event.target.disable = 'true';
+    let hiddenLetter = document.getElementsByClassName('hiddenLetter');
+    if(document.querySelector('.letter').innerText === hiddenLetter.innerText) {
+        hiddenLetter.setAttribute('opacity', 100);
+    } else {
+        
     }
 })
 
 for(i = 0; i<= alphabet.length - 1; i++) {
     let availLetters = document.querySelector('#availLetters');
     let letterButton = document.createElement('button');
+    letterButton.setAttribute('class', 'letter');
     letterButton.innerText = alphabet[i];
     availLetters.appendChild(letterButton);
-}
-// startButton.addEventListener('click', function() {
-//     }
-//     letterButton.addEventListener('click', function() {
+    // letterButton.hidden = 'true';
+};
 
-//     })
-// })
+startButton.addEventListener('click', function() {
+    document.querySelector('.letter').hidden = 'false';
+})
 
 // document.addEventListener('click', resetButton);
 // function reset() {

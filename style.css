@@ -1,0 +1,7 @@
+.hiddenLetter {
+    text-decoration: underline;
+    padding: 5px;
+}
+.guessPhrase {
+    display: flex;
+}
