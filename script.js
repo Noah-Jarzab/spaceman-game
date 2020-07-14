@@ -21,8 +21,89 @@ let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
 // const message ;
 const canvas = document.querySelector('#spaceshipImage');
 const ctx = canvas.getContext('2d');
-ctx.beginPath();
+function buildBase() {
+    ctx.fillStyle = 'silver';
+    ctx.beginPath();
+    ctx.ellipse(250, 175, 95, 25, 0, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
+}
 
+function buildDome() {
+    ctx.fillStyle = 'white';
+    ctx.beginPath();
+    ctx.ellipse(250, 170, 45, 35, 0, 0, Math.PI, true);
+    ctx.stroke();
+    ctx.fill();
+}
+
+function buildLeftLeg() {
+    ctx.moveTo(175, 190);
+    ctx.lineTo(170, 210);
+    ctx.stroke();
+}
+
+function buildCenterLeg() {
+    ctx.moveTo(250, 200);
+    ctx.lineTo(250, 220);
+    ctx.stroke();
+}
+
+function buildRightLeg() {
+    ctx.moveTo(325, 190);
+    ctx.lineTo(330, 210);
+    ctx.stroke();
+}
+
+function buildLeftCircle() {
+    ctx.fillStyle = 'orange';
+    ctx.beginPath();
+    ctx.arc(190, 177, 5, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
+}
+
+function buildCenterCircle() {
+    ctx.fillStyle = 'yellow';
+    ctx.beginPath();
+    ctx.arc(250, 185, 6, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
+}
+
+function buildRightCircle() {
+    ctx.fillStyle = 'red';
+    ctx.beginPath();
+    ctx.arc(315, 177, 5, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
+}
+
+function buildHead() {
+    ctx.beginPath();
+    ctx.arc(250, 155, 4, 0, 2 * Math.PI);
+    ctx.stroke();
+}
+
+function buildBody() {
+    ctx.moveTo(250, 159);
+    ctx.lineTo(250, 170);
+    ctx.moveTo(250, 165);
+    ctx.lineTo(242, 160);
+    ctx.moveTo(250, 165);
+    ctx.lineTo(256, 168);
+    ctx.stroke();
+}
+buildBase();
+buildDome();
+buildLeftLeg();
+buildCenterLeg();
+buildRightLeg();
+buildLeftCircle();
+buildCenterCircle();
+buildRightCircle();
+buildHead();
+buildBody();
 let inputBox = document.querySelector('.submit');
 let resetButton = document.querySelector('.reset');
 let startButton = document.querySelector('.start');
@@ -38,14 +119,15 @@ inputBox.addEventListener('click', function() {
         phraseBox.appendChild(hiddenLetter);
         hiddenLetter.setAttribute('class', 'hiddenLetter');
     }
+    document.querySelector('#phrase').hidden = 'true';
 });
 
 
 let letters = document.querySelector('.lettersBox');
 letters.addEventListener('click', function(event) {
-    event.target.disable = 'true';
+    // event.target.disable = 'true';
     let hiddenLetter = document.getElementsByClassName('hiddenLetter');
-    if(document.querySelector('.letter').innerText === hiddenLetter.innerText) {
+    if(event.target.innerText === hiddenLetter.innerText) {
         hiddenLetter.setAttribute('opacity', 100);
     } else {
         
@@ -58,12 +140,12 @@ for(i = 0; i<= alphabet.length - 1; i++) {
     letterButton.setAttribute('class', 'letter');
     letterButton.innerText = alphabet[i];
     availLetters.appendChild(letterButton);
-    // letterButton.hidden = 'true';
 };
+// add functions for when the letter buttons are clicked to make them disabled and compare to the hidden phrase and populate that or build 1/10 parts of the spaceship
 
 startButton.addEventListener('click', function() {
-    document.querySelector('.letter').hidden = 'false';
-})
+    // document.querySelectorAll('.hiddenLetter').hidden = 'true';
+});
 
 // document.addEventListener('click', resetButton);
 // function reset() {
