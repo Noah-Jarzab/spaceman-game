@@ -1,4 +1,3 @@
-// Use DOM manipulation to populate the 2 letters sections with available letters and then picked letters
 // Receive input from the .phrase box with the submit button to create blank spaces under the image that starts out empty
 // create a timer in the corner that starts when the start button is clicked
 // create a start button after the phrase is received to start the timer
@@ -10,7 +9,6 @@
 // create an event for when the image is completed or phrase is completed for a loss or win situation respectively
 // create a reset button and function that appears after the game is over
 // reset button should revert back to word input phase while maintaining the player score
-// maybe use opacity to make the image appear upon incorrect responses and disappear upon reset
 // create a messages box that responds to user selections. e.g. "You have already selected ${letter}", "${letter} is not in the phrase", "There's ${numberOfLetters} ${letter} in the phrase! Good Job!", "You're getting close to takeoff... be careful!", etc
 
 let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -94,16 +92,15 @@ function buildBody() {
     ctx.lineTo(256, 168);
     ctx.stroke();
 }
-buildBase();
-buildDome();
-buildLeftLeg();
-buildCenterLeg();
-buildRightLeg();
-buildLeftCircle();
-buildCenterCircle();
-buildRightCircle();
-buildHead();
-buildBody();
+
+for(i = 0; i<= alphabet.length - 1; i++) {
+    let availLetters = document.querySelector('#availLetters');
+    let letterButton = document.createElement('button');
+    letterButton.setAttribute('class', 'letter');
+    letterButton.innerText = alphabet[i].toUpperCase();
+    availLetters.appendChild(letterButton);
+};
+
 let inputBox = document.querySelector('.submit');
 let resetButton = document.querySelector('.reset');
 let startButton = document.querySelector('.start');
@@ -112,35 +109,30 @@ inputBox.addEventListener('click', function() {
     let phrase = document.getElementById('phrase').value;
     let hiddenPhrase = phrase.split('');
     let phraseBox = document.querySelector('.guessPhrase');
+    document.querySelector('#phrase').hidden = 'true';
+    document.querySelector('.submit').hidden = 'true';
     // then create  underlined hidden text for each array item
     for(i = 0; i <= hiddenPhrase.length - 1; i++) {
         let hiddenLetter = document.createElement('div');
-        hiddenLetter.innerText = hiddenPhrase[i];
+        hiddenLetter.innerText = hiddenPhrase[i].toUpperCase();
         phraseBox.appendChild(hiddenLetter);
         hiddenLetter.setAttribute('class', 'hiddenLetter');
     }
-    document.querySelector('#phrase').hidden = 'true';
 });
 
 
-let letters = document.querySelector('.lettersBox');
-letters.addEventListener('click', function(event) {
-    // event.target.disable = 'true';
-    let hiddenLetter = document.getElementsByClassName('hiddenLetter');
-    if(event.target.innerText === hiddenLetter.innerText) {
-        hiddenLetter.setAttribute('opacity', 100);
+const letters = document.querySelector('#availLetters');
+const hiddenLetter = document.getElementsByClassName('hiddenLetter');
+letters.addEventListener('click', handleLetterSelect);
+function handleLetterSelect(event) {
+    event.preventDefault();
+    if(event.target.innerText == hiddenLetter.innerText) {
+        console.log("Picked a correct letter");
     } else {
-        
+        console.log("Not a match")
     }
-})
-
-for(i = 0; i<= alphabet.length - 1; i++) {
-    let availLetters = document.querySelector('#availLetters');
-    let letterButton = document.createElement('button');
-    letterButton.setAttribute('class', 'letter');
-    letterButton.innerText = alphabet[i];
-    availLetters.appendChild(letterButton);
 };
+console.log(hiddenLetter);
 // add functions for when the letter buttons are clicked to make them disabled and compare to the hidden phrase and populate that or build 1/10 parts of the spaceship
 
 startButton.addEventListener('click', function() {
@@ -151,3 +143,25 @@ startButton.addEventListener('click', function() {
 // function reset() {
 
 // }
+const timeLimit = 120;
+let timeElapsed = 0;
+let timeLeft = timeLimit;
+let interval = null;
+
+const timer = document.querySelector('.timer');
+function formatTimer(time) {
+    const minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+    if(seconds < 10) {
+        seconds = `0${seconds}`;
+    }
+    timer.innerText = `${minutes}:${seconds}`;
+};
+
+function startTimer() {
+    interval = setInterval(function() {
+        timeElapsed = timeElapsed += 1;
+        timeLeft = timeLimit - timeElapsed;
+        document.getElementsByClassName('timer').innerHTML = formatTimer(timeLeft);
+    }, 1000);
+};
