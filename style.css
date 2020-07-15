@@ -1,9 +1,13 @@
 .hiddenLetter {
     text-decoration: underline;
     padding: 5px;
-    text
-    /* border-bottom: 10px black; */
+    visibility: hidden;
+    border-bottom: 10px black;
 }
 .guessPhrase {
     display: flex;
+}
+
+.start {
+    visibility: hidden;
 }
