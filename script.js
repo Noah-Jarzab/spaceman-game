@@ -1,6 +1,4 @@
-// Receive input from the .phrase box with the submit button to create blank spaces under the image that starts out empty
-// create a timer in the corner that starts when the start button is clicked
-// create a start button after the phrase is received to start the timer
+
 // create a score and score function based on time remaining once the phrase is completed
 // create a function to check the phrase and end the game upon completion
 // allow the score to carry over into the next game
@@ -115,64 +113,99 @@ function buildBody() {
 	ctx.lineTo(256, 168);
 	ctx.stroke();
 }
-// buildBase();
-// buildDome();
-// buildLeftLeg();
-// buildRightLeg();
-// buildCenterLeg();
-// buildCenterCircle();
-// buildLeftCircle();
-// buildHead();
-// buildBody();
-// buildRightCircle();
+
+buildArray = [
+	buildBase,
+	buildDome,
+	buildLeftLeg,
+	buildCenterLeg,
+	buildRightLeg,
+	buildLeftCircle,
+	buildCenterCircle,
+	buildRightCircle,
+	buildHead,
+	buildBody,
+];
+buildBase();
+buildDome();
+buildLeftLeg();
+buildRightLeg();
+buildCenterLeg();
+buildCenterCircle();
+buildLeftCircle();
+buildHead();
+buildBody();
+buildRightCircle();
 
 let inputBox = document.querySelector('.submit');
 let resetButton = document.querySelector('.reset');
 let startButton = document.querySelector('.start');
+let hideWordArray = [];
+let hiddenPhrase;
+startButton.style.visibility = 'hidden';
 // startButton.hidden = 'true';
 // resetButton.hidden = 'true';
 resetButton.style.visibility = 'hidden';
 
+
 inputBox.addEventListener('click', function () {
 	let phrase = document.getElementById('phrase').value;
-	let hiddenPhrase = phrase.split('');
+	hiddenPhrase = phrase.split('');
+	console.log(hiddenPhrase);
+	// hiddenPhrase.toUpperCase();
 	let phraseBox = document.querySelector('.guessPhrase');
 	document.querySelector('#phrase').hidden = 'true';
-    document.querySelector('.submit').hidden = 'true';
-    startButton.style.visibility = 'visible';
-	// then create  underlined hidden text for each array item
+	document.querySelector('.submit').hidden = 'true';
+	startButton.style.visibility = 'visible';
 	for (i = 0; i <= hiddenPhrase.length - 1; i++) {
-		let hiddenLetter = document.createElement('div');
-		hiddenLetter.innerText = hiddenPhrase[i].toUpperCase();
-		phraseBox.appendChild(hiddenLetter);
-		hiddenLetter.setAttribute('class', 'hiddenLetter');
+		let hiddenLetterBox = document.createElement('li');
+		hiddenLetterBox.setAttribute('class', 'hiddenBox');
+		phraseBox.appendChild(hiddenLetterBox);
+		// let hiddenLetter = document.createElement('div');
+		hiddenLetterBox.innerText = hiddenPhrase[i];
+		// hiddenLetter.setAttribute('class', 'hiddenLetter');
+		// hiddenLetterBox.appendChild(hiddenLetter);
+
+		// if(hiddenPhrase[i] === ' ') {
+		// 	hiddenLetterBox.innerHTML = '-';
+		// } else {
+		// 	hiddenLetterBox.innerHTML = '_';
+		// }
 	}
 });
-
-const letters = document.querySelector('#availLetters');
-const hiddenLetter = document.getElementsByClassName('hiddenLetter');
-letters.addEventListener('click', handleLetterSelect);
-function handleLetterSelect(event) {
-	event.preventDefault();
-	if (event.target.innerText == hiddenLetter.innerText) {
-		console.log('Picked a correct letter');
-	} else {
-		console.log('Not a match');
-	}
-}
 
 // add functions for when the letter buttons are clicked to make them disabled and compare to the hidden phrase and populate that or build 1/10 parts of the spaceship
 
 startButton.addEventListener('click', function () {
-    for (i = 0; i <= alphabet.length - 1; i++) {
-        let availLetters = document.querySelector('#availLetters');
-        let letterButton = document.createElement('button');
-        letterButton.setAttribute('class', 'letter');
-        letterButton.innerText = alphabet[i].toUpperCase();
-        availLetters.appendChild(letterButton);
-    }
-	startTimer();
+	startButton.style.visibility = 'hidden';
+	resetButton.style.visibility = 'visible';
+	// startTimer();
 });
+
+for (i = 0; i <= alphabet.length - 1; i++) {
+	let availLetters = document.querySelector('#availLetters');
+	let letterButton = document.createElement('button');
+	letterButton.setAttribute('class', 'letterChoice');
+    letterButton.innerText = alphabet[i];
+    letterButton.setAttribute('data-letter', letterButton.innerText);
+	availLetters.appendChild(letterButton);
+}
+
+const letter = document.querySelector('#availLetters');
+// let modPhrase = document.getElementsByClassName('hiddenLetter');
+// const inputLetters = document.querySelector('.guessPhrase');
+letter.addEventListener('click', handleLetterButton);
+function handleLetterButton(event) {
+	console.log(letter);
+	event.preventDefault();
+	for(i = 0; i < hiddenPhrase.length; i++) {
+		if(hiddenPhrase.includes(event.target.innerHTML)) {
+			console.log('Correct Letter');
+		} else {
+			console.log('Letter not here');
+		}
+	}
+};
 
 // document.addEventListener('click', resetButton);
 // function reset() {
@@ -184,7 +217,7 @@ let timeElapsed = 0;
 let timeLeft = timeLimit;
 let interval = null;
 
-const timer = document.querySelector('.timer');
+const timer = document.querySelector('#time');
 function formatTimer(time) {
 	const minutes = Math.floor(time / 60);
 	let seconds = time % 60;

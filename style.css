@@ -1,13 +1,35 @@
 .hiddenLetter {
-    text-decoration: underline;
     padding: 5px;
-    visibility: hidden;
-    border-bottom: 10px black;
-}
-.guessPhrase {
-    display: flex;
+    opacity: 0;
 }
 
-.start {
-    visibility: hidden;
+body {
+    background: rgb(70, 52, 110);
+    color: rgb(220, 219, 235);
+}
+
+.hiddenBox {
+    margin: 10px;
+    padding-bottom: 2px;
+    color: rgb(70, 52, 110);
+    border-bottom: 2px solid rgb(220, 219, 235);
+}
+
+h1, h3, footer, .guessPhrase, #availLetters {
+    display: flex;
+    justify-content: center;
+}
+
+.timer {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 24px;
+}
+
+canvas {
+    margin-left: 27%;
+}
+
+.score {
+    font-size: 24px;
 }
