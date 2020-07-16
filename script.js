@@ -1,9 +1,7 @@
-
 // create a score and score function based on time remaining once the phrase is completed
 // create a function to check the phrase and end the game upon completion
 // allow the score to carry over into the next game
 // create a function where the available letters gray out when selected and the picked letters illuminate upon selection
-// when a selection is not in the phrase or word have a function populate part of the image
 // create an event for when the image is completed or phrase is completed for a loss or win situation respectively
 // create a reset button and function that appears after the game is over
 // reset button should revert back to word input phase while maintaining the player score
@@ -126,16 +124,6 @@ buildArray = [
 	buildHead,
 	buildBody,
 ];
-buildBase();
-buildDome();
-buildLeftLeg();
-buildRightLeg();
-buildCenterLeg();
-buildCenterCircle();
-buildLeftCircle();
-buildHead();
-buildBody();
-buildRightCircle();
 
 let inputBox = document.querySelector('.submit');
 let resetButton = document.querySelector('.reset');
@@ -147,21 +135,19 @@ startButton.style.visibility = 'hidden';
 // resetButton.hidden = 'true';
 resetButton.style.visibility = 'hidden';
 
-
 inputBox.addEventListener('click', function () {
 	let phrase = document.getElementById('phrase').value;
 	hiddenPhrase = phrase.split('');
 	console.log(hiddenPhrase);
-	// hiddenPhrase.toUpperCase();
 	let phraseBox = document.querySelector('.guessPhrase');
 	document.querySelector('#phrase').hidden = 'true';
 	document.querySelector('.submit').hidden = 'true';
-	startButton.style.visibility = 'visible';
+	// startButton.style.visibility = 'visible';
 	for (i = 0; i <= hiddenPhrase.length - 1; i++) {
 		let hiddenLetterBox = document.createElement('li');
 		hiddenLetterBox.setAttribute('class', 'hiddenBox');
+		hiddenLetterBox.setAttribute('id', 'indLetter');
 		phraseBox.appendChild(hiddenLetterBox);
-		// let hiddenLetter = document.createElement('div');
 		hiddenLetterBox.innerText = hiddenPhrase[i];
 		// hiddenLetter.setAttribute('class', 'hiddenLetter');
 		// hiddenLetterBox.appendChild(hiddenLetter);
@@ -186,27 +172,52 @@ for (i = 0; i <= alphabet.length - 1; i++) {
 	let availLetters = document.querySelector('#availLetters');
 	let letterButton = document.createElement('button');
 	letterButton.setAttribute('class', 'letterChoice');
-    letterButton.innerText = alphabet[i];
-    letterButton.setAttribute('data-letter', letterButton.innerText);
+	letterButton.innerText = alphabet[i];
+	letterButton.setAttribute('data-letter', letterButton.innerText);
 	availLetters.appendChild(letterButton);
 }
-
+// function reveal(value) {
+// 	hiddenPhrase.setAttribute('class', 'foundLetter');
+// };
+// function removeClass() {
+// 	let oldClass = document.getElementsByClassName('removedClass');
+// 	oldClass.classList.remove('hiddenBox');
+// }
+let correct;
+let wrongGuess = 0;
 const letter = document.querySelector('#availLetters');
 // let modPhrase = document.getElementsByClassName('hiddenLetter');
 // const inputLetters = document.querySelector('.guessPhrase');
 letter.addEventListener('click', handleLetterButton);
 function handleLetterButton(event) {
-	console.log(letter);
-	event.preventDefault();
-	for(i = 0; i < hiddenPhrase.length; i++) {
-		if(hiddenPhrase.includes(event.target.innerHTML)) {
-			console.log('Correct Letter');
-		} else {
-			console.log('Letter not here');
+	// event.preventDefault();
+	if (hiddenPhrase.includes(event.target.innerHTML)) {
+		console.log('Found match');
+		hiddenPhrase.forEach(removeClass);
+		// hiddenPhrase.forEach(reveal);
+		// hiddenPhrase[i].innerHTML
+		// setAttribute('class', 'foundLetter');
+		// for(i = 0; i < hiddenPhrase.length; i++) {
+		// 	let correct = hiddenPhrase[i];
+		// 	correct.style.color = 'rgb(220, 219, 235)';
+	} else {
+		buildArray[wrongGuess]();
+		wrongGuess += 1;
+		console.log(wrongGuess);
+		if (wrongGuess === 10) {
+			endGame();
 		}
 	}
-};
+}
+let finale = document.querySelector('.endMessage');
+let gameOver = document.createElement('div');
+finale.appendChild(gameOver);
 
+function endGame() {
+	finale.innerText = 'You Lost!';
+	resetButton.style.visibility = 'visible';
+	//finale.setAttribute('class', 'loss');
+}
 // document.addEventListener('click', resetButton);
 // function reset() {
 

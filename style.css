@@ -8,11 +8,22 @@ body {
     color: rgb(220, 219, 235);
 }
 
+.endMessage {
+    color: red;
+    font-size: 45px;
+    display: flex;
+    justify-content: center;
+}
+
 .hiddenBox {
     margin: 10px;
     padding-bottom: 2px;
     color: rgb(70, 52, 110);
     border-bottom: 2px solid rgb(220, 219, 235);
+}
+
+.foundLetter {
+    color: rgb(220, 219, 235);
 }
 
 h1, h3, footer, .guessPhrase, #availLetters {
