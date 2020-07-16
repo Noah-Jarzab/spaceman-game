@@ -135,11 +135,10 @@ startButton.style.visibility = 'hidden';
 // resetButton.hidden = 'true';
 resetButton.style.visibility = 'hidden';
 
+let phraseBox = document.querySelector('.guessPhrase');
 inputBox.addEventListener('click', function () {
 	let phrase = document.getElementById('phrase').value;
 	hiddenPhrase = phrase.split('');
-	console.log(hiddenPhrase);
-	let phraseBox = document.querySelector('.guessPhrase');
 	document.querySelector('#phrase').hidden = 'true';
 	document.querySelector('.submit').hidden = 'true';
 	// startButton.style.visibility = 'visible';
@@ -173,27 +172,42 @@ for (i = 0; i <= alphabet.length - 1; i++) {
 	let letterButton = document.createElement('button');
 	letterButton.setAttribute('class', 'letterChoice');
 	letterButton.innerText = alphabet[i];
-	letterButton.setAttribute('data-letter', letterButton.innerText);
 	availLetters.appendChild(letterButton);
 }
 // function reveal(value) {
-// 	hiddenPhrase.setAttribute('class', 'foundLetter');
+// 	hiddenPhrase.value = setAttribute('class', 'foundLetter')
+// 	// hiddenPhrase.setAttribute('class', 'foundLetter');
 // };
 // function removeClass() {
 // 	let oldClass = document.getElementsByClassName('removedClass');
 // 	oldClass.classList.remove('hiddenBox');
 // }
 let correct;
+let showPhrase = '';
+// let showPhrase = document.setAttribute('class', 'foundLetter');
 let wrongGuess = 0;
 const letter = document.querySelector('#availLetters');
 // let modPhrase = document.getElementsByClassName('hiddenLetter');
 // const inputLetters = document.querySelector('.guessPhrase');
-letter.addEventListener('click', handleLetterButton);
-function handleLetterButton(event) {
-	// event.preventDefault();
+letter.addEventListener('click', function handleLetterButton(event) {
+	event.preventDefault();
 	if (hiddenPhrase.includes(event.target.innerHTML)) {
+		for(i = 0; i <= hiddenPhrase.length -1; i++) {
+			showPhrase = hiddenPhrase[i];
+			if(showPhrase === event.target.innerHTML) {
+				let showPhrase = document.createElement('li');
+				phraseBox.appendChild(showPhrase);
+				showPhrase.innerText = hiddenPhrase[i];
+				showPhrase.setAttribute('class', 'foundLetter');
+				// hiddenPhrase.setAttribute('class', 'foundLetter');
+				console.log(showPhrase);
+				// showPhrase.style.color = 'red';
+				// showPhrase.style.color = 'orange';
+				// showPhrase.setAttribute('class', 'foundLetter');
+			}
+		}
 		console.log('Found match');
-		hiddenPhrase.forEach(removeClass);
+		// hiddenPhrase.forEach(removeClass);
 		// hiddenPhrase.forEach(reveal);
 		// hiddenPhrase[i].innerHTML
 		// setAttribute('class', 'foundLetter');
@@ -205,51 +219,51 @@ function handleLetterButton(event) {
 		wrongGuess += 1;
 		console.log(wrongGuess);
 		if (wrongGuess === 10) {
-			endGame();
+			endGameLose();
 		}
 	}
-}
+});
 let finale = document.querySelector('.endMessage');
 let gameOver = document.createElement('div');
 finale.appendChild(gameOver);
 
-function endGame() {
+function endGameLose() {
 	finale.innerText = 'You Lost!';
 	resetButton.style.visibility = 'visible';
 	//finale.setAttribute('class', 'loss');
 }
-// document.addEventListener('click', resetButton);
-// function reset() {
 
+// document.addEventListener('click', function reset() {
+// 	window.reset();
+// });
+
+// const timeLimit = 90;
+// let timeElapsed = 0;
+// let timeLeft = timeLimit;
+// let interval = null;
+
+// const timer = document.querySelector('#time');
+// function formatTimer(time) {
+// 	const minutes = Math.floor(time / 60);
+// 	let seconds = time % 60;
+// 	if (seconds < 10) {
+// 		seconds = `0${seconds}`;
+// 	}
+// 	timer.innerText = `${minutes}:${seconds}`;
 // }
 
-const timeLimit = 90;
-let timeElapsed = 0;
-let timeLeft = timeLimit;
-let interval = null;
+// function timerUp() {
+// 	clearInterval(interval);
+// 	alert("Time's up!!");
+// }
 
-const timer = document.querySelector('#time');
-function formatTimer(time) {
-	const minutes = Math.floor(time / 60);
-	let seconds = time % 60;
-	if (seconds < 10) {
-		seconds = `0${seconds}`;
-	}
-	timer.innerText = `${minutes}:${seconds}`;
-}
-
-function timerUp() {
-	clearInterval(interval);
-	alert("Time's up!!");
-}
-
-function startTimer() {
-	interval = setInterval(function () {
-		timeElapsed = timeElapsed += 1;
-		timeLeft = timeLimit - timeElapsed;
-		document.getElementsByClassName('timer').innerHTML = formatTimer(timeLeft);
-		if (timeLeft === 0) {
-			timerUp();
-		}
-	}, 1000);
-}
+// function startTimer() {
+// 	interval = setInterval(function () {
+// 		timeElapsed = timeElapsed += 1;
+// 		timeLeft = timeLimit - timeElapsed;
+// 		document.getElementsByClassName('timer').innerHTML = formatTimer(timeLeft);
+// 		if (timeLeft === 0) {
+// 			timerUp();
+// 		}
+// 	}, 1000);
+// }
