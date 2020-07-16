@@ -131,8 +131,6 @@ let startButton = document.querySelector('.start');
 let hideWordArray = [];
 let hiddenPhrase;
 startButton.style.visibility = 'hidden';
-// startButton.hidden = 'true';
-// resetButton.hidden = 'true';
 resetButton.style.visibility = 'hidden';
 
 let phraseBox = document.querySelector('.guessPhrase');
@@ -141,7 +139,6 @@ inputBox.addEventListener('click', function () {
 	hiddenPhrase = phrase.split('');
 	document.querySelector('#phrase').hidden = 'true';
 	document.querySelector('.submit').hidden = 'true';
-	// startButton.style.visibility = 'visible';
 	for (i = 0; i <= hiddenPhrase.length - 1; i++) {
 		let hiddenLetterBox = document.createElement('li');
 		hiddenLetterBox.setAttribute('class', 'hiddenBox');
@@ -159,8 +156,6 @@ inputBox.addEventListener('click', function () {
 	}
 });
 
-// add functions for when the letter buttons are clicked to make them disabled and compare to the hidden phrase and populate that or build 1/10 parts of the spaceship
-
 startButton.addEventListener('click', function () {
 	startButton.style.visibility = 'hidden';
 	resetButton.style.visibility = 'visible';
@@ -174,21 +169,12 @@ for (i = 0; i <= alphabet.length - 1; i++) {
 	letterButton.innerText = alphabet[i];
 	availLetters.appendChild(letterButton);
 }
-// function reveal(value) {
-// 	hiddenPhrase.value = setAttribute('class', 'foundLetter')
-// 	// hiddenPhrase.setAttribute('class', 'foundLetter');
-// };
-// function removeClass() {
-// 	let oldClass = document.getElementsByClassName('removedClass');
-// 	oldClass.classList.remove('hiddenBox');
-// }
+
 let correct;
 let showPhrase = '';
 // let showPhrase = document.setAttribute('class', 'foundLetter');
 let wrongGuess = 0;
 const letter = document.querySelector('#availLetters');
-// let modPhrase = document.getElementsByClassName('hiddenLetter');
-// const inputLetters = document.querySelector('.guessPhrase');
 letter.addEventListener('click', function handleLetterButton(event) {
 	event.preventDefault();
 	if (hiddenPhrase.includes(event.target.innerHTML)) {
@@ -199,25 +185,13 @@ letter.addEventListener('click', function handleLetterButton(event) {
 				phraseBox.appendChild(showPhrase);
 				showPhrase.innerText = hiddenPhrase[i];
 				showPhrase.setAttribute('class', 'foundLetter');
-				// hiddenPhrase.setAttribute('class', 'foundLetter');
-				console.log(showPhrase);
-				// showPhrase.style.color = 'red';
-				// showPhrase.style.color = 'orange';
-				// showPhrase.setAttribute('class', 'foundLetter');
 			}
 		}
 		console.log('Found match');
-		// hiddenPhrase.forEach(removeClass);
-		// hiddenPhrase.forEach(reveal);
-		// hiddenPhrase[i].innerHTML
-		// setAttribute('class', 'foundLetter');
-		// for(i = 0; i < hiddenPhrase.length; i++) {
-		// 	let correct = hiddenPhrase[i];
-		// 	correct.style.color = 'rgb(220, 219, 235)';
+	
 	} else {
 		buildArray[wrongGuess]();
 		wrongGuess += 1;
-		console.log(wrongGuess);
 		if (wrongGuess === 10) {
 			endGameLose();
 		}
@@ -230,7 +204,6 @@ finale.appendChild(gameOver);
 function endGameLose() {
 	finale.innerText = 'You Lost!';
 	resetButton.style.visibility = 'visible';
-	//finale.setAttribute('class', 'loss');
 }
 
 // document.addEventListener('click', function reset() {
